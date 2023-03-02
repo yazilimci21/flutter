@@ -47,7 +47,7 @@ class BuildWebCommand extends BuildSubCommand {
     if (featureFlags.isFlutterWebWasmEnabled) {
       argParser.addFlag(
         'wasm',
-        help: 'Compile to WebAssembly rather than Javascript (experimental).',
+        help: 'Compile to WebAssembly rather than JavaScript (experimental).',
       );
     } else {
       // Add the flag as hidden. Will give a helpful error message in [runCommand] below.
