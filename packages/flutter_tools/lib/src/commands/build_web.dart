@@ -47,7 +47,13 @@ class BuildWebCommand extends BuildSubCommand {
     if (featureFlags.isFlutterWebWasmEnabled) {
       argParser.addFlag(
         'wasm',
-        help: 'Compile to WebAssembly rather than Javascript (experimental).'
+        help: 'Compile to WebAssembly rather than Javascript (experimental).',
+      );
+    } else {
+      // Add the flag as hidden. Will give a helpful error message in [runCommand] below.
+      argParser.addFlag(
+        'wasm',
+        hide: true,
       );
     }
 
@@ -111,6 +117,12 @@ class BuildWebCommand extends BuildSubCommand {
     if (!featureFlags.isWebEnabled) {
       throwToolExit('"build web" is not currently supported. To enable, run "flutter config --enable-web".');
     }
+
+    final bool wasmRequested = boolArg('wasm')!;
+    if (wasmRequested && !featureFlags.isFlutterWebWasmEnabled) {
+      throwToolExit('Compiling to WebAssembly (wasm) is only available on the master channel.');
+    }
+
     final FlutterProject flutterProject = FlutterProject.current();
     final String target = stringArgDeprecated('target')!;
     final BuildInfo buildInfo = await getBuildInfo();
@@ -149,7 +161,7 @@ class BuildWebCommand extends BuildSubCommand {
       stringArgDeprecated('pwa-strategy')!,
       boolArgDeprecated('source-maps'),
       boolArgDeprecated('native-null-assertions'),
-      boolArg('wasm')!,
+      wasmRequested,
       baseHref: baseHref,
       dart2jsOptimization: stringArgDeprecated('dart2js-optimization') ?? kDart2jsDefaultOptimizationLevel,
       outputDirectoryPath: outputDirectoryPath,
