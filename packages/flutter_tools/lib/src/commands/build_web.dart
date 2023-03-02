@@ -149,7 +149,7 @@ class BuildWebCommand extends BuildSubCommand {
       stringArgDeprecated('pwa-strategy')!,
       boolArgDeprecated('source-maps'),
       boolArgDeprecated('native-null-assertions'),
-      boolArg('wasm') ?? false,
+      boolArg('wasm')!,
       baseHref: baseHref,
       dart2jsOptimization: stringArgDeprecated('dart2js-optimization') ?? kDart2jsDefaultOptimizationLevel,
       outputDirectoryPath: outputDirectoryPath,
