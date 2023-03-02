@@ -87,6 +87,12 @@ void main() {
       'This setting will take effect on the master, beta, and stable channels.');
     });
 
+    testWithoutContext('Flutter web wasm help string', () {
+      expect(flutterWebWasm.generateHelpMessage(),
+      'Enable or disable WebAssembly compilation from flutter build web. '
+      'This setting will take effect on the master channel.');
+    });
+
     testWithoutContext('Flutter macOS desktop help string', () {
       expect(flutterMacOSDesktopFeature.generateHelpMessage(),
       'Enable or disable support for desktop on macOS. '

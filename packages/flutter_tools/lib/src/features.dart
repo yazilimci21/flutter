@@ -151,7 +151,7 @@ const Feature singleWidgetReload = Feature(
 
 /// Enabling WebAssembly compilation from `flutter build web`
 const Feature flutterWebWasm = Feature(
-  name: 'Enable WebAssembly compilation from flutter build web',
+  name: 'WebAssembly compilation from flutter build web',
   configSetting: 'flutter-web-wasm',
   environmentOverride: 'FLUTTER_WEB_WASM',
   master: FeatureChannelSetting(
